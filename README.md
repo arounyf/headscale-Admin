@@ -35,6 +35,8 @@ docker-compose up -d
 - 角色管理
 - api和menu权限管理
 - 支持postsql与sqlite数据库
+# 兼容性
+仅通过headscale:v0.22.3测试
 
 # 系统截图
 
