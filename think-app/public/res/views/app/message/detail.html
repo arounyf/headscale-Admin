@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>消息详情标题</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../../../res/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../../res/adminui/dist/css/admin.css" media="all">
+</head>
+<body>
+
+  <div class="layui-fluid" id="LAY-app-message-detail">
+    <div class="layui-card layuiAdmin-msg-detail">
+      <script type="text/html" template lay-url="{{ layui.setter.paths.base }}json/message/detail.js?id={{ layui.router().search.id }}">
+        <div class="layui-card-header">
+          <h1>{{ d.data.title }}</h1>
+          <p>
+            <span>{{ layui.util.timeAgo(d.data.time) }}</span>
+          </p>
+        </div>
+        <div class="layui-card-body layui-text">
+          <div class="layadmin-text">
+            {{- d.data.content }}
+          </div>
+          
+          <div style="padding-top: 30px;">
+            <a href="javascript:;" layadmin-event="back" class="layui-btn layui-btn-primary layui-btn-sm">返回上级</a>
+          </div>
+        </div>
+      </script>
+    </div>
+  </div>
+
+<script src="../../../res/layui/layui.js"></script>  
+  <script>
+  layui.config({
+    base: '../../../res/' // 静态资源所在路径
+  }).use(['index']);
+  </script>
+<!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "43b4b1a48ab04f89a979a2c4f6be6118"}'></script><!-- Cloudflare Pages Analytics --></body>
+</html>
