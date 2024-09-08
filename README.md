@@ -32,6 +32,7 @@ docker-compose up -d
 - 预认证密钥管理
 - 角色管理
 - api和menu权限管理
+- 支持postsql与sqlite数据库
 
 # 系统截图
 
