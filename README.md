@@ -1,4 +1,4 @@
-![GitHub repo size](https://img.shields.io/github/repo-size/arounyf/headscale-Admin)
+[![GitHub repo size](https://img.shields.io/github/repo-size/arounyf/headscale-Admin)(https://github.com/arounyf/headscale-Admin)]
 ![Docker Image Size](https://img.shields.io/docker/image-size/runyf/hs-admin)
 [![docker pulls](https://img.shields.io/docker/pulls/runyf/derper.svg?color=brightgreen)](https://hub.docker.com/r/runyf/hs-admin)
 [![platfrom](https://img.shields.io/badge/platform-amd64%20%7C%20arm64-brightgreen)](https://hub.docker.com/r/runyf/hs-admin/tags)
