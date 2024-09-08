@@ -2,8 +2,9 @@
 [![Docker Image Size](https://img.shields.io/docker/image-size/runyf/hs-admin)](https://hub.docker.com/r/runyf/hs-admin)
 [![docker pulls](https://img.shields.io/docker/pulls/runyf/derper.svg?color=brightgreen)](https://hub.docker.com/r/runyf/hs-admin)
 [![platfrom](https://img.shields.io/badge/platform-amd64%20%7C%20arm64-brightgreen)](https://hub.docker.com/r/runyf/hs-admin/tags)
-
 # 介绍
+采用Think-php6+layui+falsk开发，基于用户的headscale后台管理中心
+# 灵感
 2024年6月我接触到了tailscale,后在个人博客上发布了derper与headscale的搭建教程   
 2024年9月8日headscale-Admin首个版本正式开源发布
 
