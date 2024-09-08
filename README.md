@@ -7,6 +7,18 @@
 # 灵感
 2024年6月我接触到了tailscale,后在个人博客上发布了derper与headscale的搭建教程   
 2024年9月8日headscale-Admin首个版本正式开源发布
+# 安装
+### 传统安装
+ 1. 安装php-composer
+ 2. 使用composer安装think-captcha
+ 3. 安装psql驱动
+### 使用docker部署（推荐）
+```shell
+cd
+git clone git@github.com:arounyf/headscale-Admin.git hs-admin
+cd hs-admin
+docker-compose up -d
+```
 
 # 功能
 - 用户管理
