@@ -1,5 +1,3 @@
-![index](https://github.com/user-attachments/assets/74df980d-f780-4466-a797-630753a342b8)# Headscale-Admin
-
 [![docker workflow](https://github.com/fredliang44/derper-docker/actions/workflows/docker-image.yml/badge.svg)](https://hub.docker.com/r/runyf/derper)
 [![docker pulls](https://img.shields.io/docker/pulls/runyf/derper.svg?color=brightgreen)](https://hub.docker.com/r/runyf/derper)
 [![platfrom](https://img.shields.io/badge/platform-amd64%20%7C%20arm64-brightgreen)](https://hub.docker.com/r/runyf/derper/tags)
