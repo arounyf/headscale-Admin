@@ -8,5 +8,7 @@ services:
       - "8011:8000"  
     volumes:  
       - ~/hs-admin/think-app:/var/www/html
+      - ~/headscale/config:/headscale/config
+      - ~/headscale/data:/headscale/data
     environment:
       - TZ=Asia/Shanghai
