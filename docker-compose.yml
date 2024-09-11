@@ -1,6 +1,6 @@
 services:  
   php:  
-    image: runyf/hs-admin
+    image: runyf/hs-admin:v1.0
     container_name: hs-admin  
     network_mode: bridge
     restart: unless-stopped  
