@@ -18,7 +18,7 @@ qq群 892467054
 ### 使用docker部署（推荐）
 ```shell
 cd
-git clone git@github.com:arounyf/headscale-Admin.git hs-admin
+git clone https://github.com/arounyf/headscale-Admin.git hs-admin
 cd hs-admin
 docker-compose up -d
 ```
