@@ -2,7 +2,7 @@
 # 介绍
 [![GitHub repo size](https://img.shields.io/github/repo-size/arounyf/headscale-Admin)](https://github.com/arounyf/headscale-Admin)
 [![Docker Image Size](https://img.shields.io/docker/image-size/runyf/hs-admin)](https://hub.docker.com/r/runyf/hs-admin)
-[![docker pulls](https://img.shields.io/docker/pulls/runyf/derper.svg?color=brightgreen)](https://hub.docker.com/r/runyf/hs-admin)
+[![docker pulls](https://img.shields.io/docker/pulls/runyf/hs-admin.svg?color=brightgreen)](https://hub.docker.com/r/runyf/hs-admin)
 [![platfrom](https://img.shields.io/badge/platform-amd64%20%7C%20arm64-brightgreen)](https://hub.docker.com/r/runyf/hs-admin/tags)
 
 采用Think-php6+layui+flask开发，基于用户的headscale后台管理中心,欢迎点一个Star   
