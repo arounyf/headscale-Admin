@@ -12,7 +12,7 @@
  Target Server Version : 140013
  File Encoding         : 65001
 
- Date: 08/09/2024 19:13:49
+ Date: 12/09/2024 20:11:17
 */
 
 
@@ -350,7 +350,8 @@ CREATE TABLE "public"."routes" (
   "prefix" text COLLATE "pg_catalog"."default",
   "advertised" bool,
   "enabled" bool,
-  "is_primary" bool
+  "is_primary" bool,
+  "user_id" int4
 )
 ;
 
