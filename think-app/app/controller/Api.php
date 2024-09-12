@@ -320,42 +320,56 @@ class Api extends Base
     public function getRoute(){
         $page = Request::param('page');
         $limit = Request::param('limit');
-        //先查询所有的路由
-        $all_route = Db::table('routes')->order('id')->limit($limit)->page($page)->select();
+
+        //首先填充user_id,注意user_id非headscale字段
+        $cursor = Db::table('routes')->order('id')->where('user_id', null)->cursor();
+        foreach($cursor as $route){
+            $user_id =  Db::table('machines')->where('id',$route['machine_id'])->column('user_id');
+            Db::name('routes')->where('id',$route['id'])->update(['user_id' => $user_id[0]]);
+        }
+
+
+        if(Session::get('user_role') == "manager"){
+            $where_map = [];
+            $count = Db::table('routes')->count();
+        }else{
+            $where_map = [['user_id','=',Session::get('user_id')]];
+            $count = Db::table('routes')->where('user_id',Session::get('user_id'))->count();
+        }
+        
+
+        $cursor = Db::table('routes')->alias('r')
+            ->join('users u','r.user_id = u.id')
+            ->field('r.id,r.prefix,r.machine_id,r.created_at,r.enabled,u.name')
+            ->order('id')
+            ->where($where_map)
+            ->limit($limit)
+            ->page($page)
+            ->cursor();
+        
 
         $routes = [];
-        foreach ($all_route as $value) {
-            //如果是管理员则查询所有路由对应的节点，反正则查询用户自己的节点
-            if (Session::get('user_role') == "manager"){
-                $machines = Db::table('machines')->field('user_id,given_name')->order('id')->where('id',$value['machine_id'])->select();
-                $user_name = Db::table('users')->order('id')->where('id',$machines[0]['user_id'])->column('name');
-            }else{
-                $where_map = ['id' => $value['machine_id'],'user_id' => Session::get('user_id')];
-                $machines = Db::table('machines')->field('user_id,given_name')->order('id')->where($where_map)->select();
-                $user_name = "0";
-            }
-            //判断节点数据是否存在，如果不存在则说明一定是普通用户
-            if(count($machines) != 0){
-                 $route = [
-                    'id' => $value['id'],
-                    'name' => $user_name[0],
-                    'machine_id' => $machines[0]['given_name'],
-                    'route' => $value['prefix'],
-                    'create_time' => $this->offsetTime($value['created_at']),
-                    'enable' => $value['enabled']
-                ];
-                array_push($routes,$route);
-            }
+        foreach($cursor as $value){
+            $machines = Db::table('machines')->field('given_name')->where('id',$value['machine_id'])->select();
+            $route = [
+                'id' => $value['id'],
+                'name' => $value['name'],
+                'machine_id' => $machines[0]['given_name'],
+                'route' => $value['prefix'],
+                'create_time' => $this->offsetTime($value['created_at']),
+                'enable' => $value['enabled']
+            ];
+            array_push($routes,$route);
         }
+
 
         $this->res["code"] = 0;
         $this->res["msg"] = "获取成功";
-        $this->res["count"] = count($routes);
+        $this->res["count"] = $count;
         $this->res["data"] = $routes;
         $this->res["totalRow"] = ["count" => count($routes)];
         $this->resprint($this->res);
     }
-
 
     public function route_enable(){
         $route_id = Request::param('route_id');
