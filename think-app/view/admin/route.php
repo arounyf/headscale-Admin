@@ -96,7 +96,7 @@
                   if(res.code == 0){
                     layer.msg('打开成功', {icon: 6});
                   }else{
-                    layer.msg('打开失败', {icon: 7});
+                    layer.msg(res.msg, {icon: 7});
                   }
               }
         });
