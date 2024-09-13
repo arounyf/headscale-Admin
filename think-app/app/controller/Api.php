@@ -375,15 +375,20 @@ class Api extends Base
         $route_id = Request::param('route_id');
         $url =  $this->server_url."/api/v1/routes/".$route_id."/enable";  
 
-        if($this->route_verify($route_id)){
-            $this->curl_post($url);
-            $this->log_record("路由打开成功，路由id:".$route_id);
-            $this->res['code'] = 0;
-            $this->res['msg'] = "打开成功";
-        }
-
-        $this->resprint($this->res);
+        $prefix = Db::table('routes')->where('id',$route_id)->column('prefix');
+        $count = Db::table('routes')->where('prefix',$prefix[0])->count();
         
+        if($count >1){
+            $this->res['msg'] = "打开失败,该网段已被使用";
+        }else{
+            if($this->route_verify($route_id)){
+                $this->curl_post($url);
+                $this->log_record("路由打开成功，路由id:".$route_id);
+                $this->res['code'] = 0;
+                $this->res['msg'] = "打开成功";
+            }
+        }
+        $this->resprint($this->res);
     }
 
     public function route_disable(){
