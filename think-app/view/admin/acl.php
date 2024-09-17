@@ -119,7 +119,7 @@
                   shadeClose: true, // 点击遮罩区域，关闭弹层
                   maxmin: true, // 允许全屏最小化
                   anim: 0, // 0-6 的动画形式，-1 不开启
-                  content: res.data
+                  content: (res.data).replace(/},/g, "<br>")
                 });
               }else{
                 layer.msg(res.msg, {icon: 7});
