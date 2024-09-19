@@ -32,6 +32,9 @@ cd think-app
 cp .example.env .env
 vim .env
 ```
+.env 参数说明
+- TOKEN 使用此命令创建 `docker exec -it headscale headscale apikey create`
+
 3. 初始化sqlite数据库   
 
 `curl 172.17.0.1:8011/install`
