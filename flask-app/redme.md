@@ -1,4 +1,4 @@
-#### 文档
+#### 如何安装流量监控
 cd ~/hs-admin/flask-app
 python3 -m venv tutorial-env
 source tutorial-env/bin/activate
