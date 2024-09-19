@@ -33,6 +33,7 @@ cp .example.env .env
 vim .env
 ```
 3. 初始化sqlite数据库   
+
 `curl 172.17.0.1:8011/install`
 
 
