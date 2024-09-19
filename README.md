@@ -20,14 +20,16 @@ qq群 892467054
 ```shell
 cd
 git clone https://github.com/arounyf/headscale-Admin.git hs-admin
-cd hs-admin
+cd hs-admin/headscale
+docker-compose up -d
+cd ..
 docker-compose up -d
 ```
 2. 修改配置文件
-cd ~/hs-admin
 vim headscale/config.yml
-cp /think-app/.example.env .env
-vim /think-app/.env
+cd think-app
+cp .example.env .env
+vim .env
 
 3. 初始化sqlite数据库
 curl 172.17.0.1:8011/install
