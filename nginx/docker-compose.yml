@@ -8,9 +8,9 @@ services:
       - "80:80"  
       - "443:443"  
     volumes:  
-      - ~/nginx/nginx.conf:/etc/nginx/nginx.conf  
-      - ~/nginx/conf.d:/etc/nginx/conf.d  
-      - ~/nginx/ssl:/etc/nginx/ssl  
-      - ~/nginx/log:/var/log/nginx  
-      - ~/nginx/html:/usr/share/nginx/html  
+      - ~/hs-admin/nginx/nginx.conf:/etc/nginx/nginx.conf  
+      - ~/hs-admin/nginx/conf.d:/etc/nginx/conf.d  
+      - ~/hs-admin/nginx/ssl:/etc/nginx/ssl  
+      - ~/hs-admin/nginx/log:/var/log/nginx  
+      - ~/hs-admin/nginx/html:/usr/share/nginx/html  
   
