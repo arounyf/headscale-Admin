@@ -29,6 +29,9 @@ vim headscale/config.yml
 cp /think-app/.example.env .env
 vim /think-app/.env
 
+3. 初始化sqlite数据库
+curl 172.17.0.1:8011/install
+
 
 
 # 功能

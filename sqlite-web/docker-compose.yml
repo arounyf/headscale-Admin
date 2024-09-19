@@ -1,0 +1,12 @@
+services:  
+  headscale:  
+    image: runyf/sqlite-web
+    container_name: sqlite-web
+    restart: always  
+    network_mode: bridge
+    ports:  
+      - "8022:8080"  
+    volumes:  
+      - ~/hs-admin/headscale/data:/data  
+    environment:
+      SQLITE_DATABASE: db.sqlite

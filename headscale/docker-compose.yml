@@ -8,8 +8,8 @@ services:
       - "8080:8080"  
       - "9090:9090"  
     volumes:  
-      - ~/headscale/config:/etc/headscale
-      - ~/headscale/data:/var/lib/headscale
+      - ~/hs-admin/headscale/config:/etc/headscale
+      - ~/hs-admin/headscale/data:/var/lib/headscale
     command: ["headscale", "serve"] 
     environment:
       - TZ=Asia/Shanghai
