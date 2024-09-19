@@ -26,13 +26,14 @@ cd ..
 docker-compose up -d
 ```
 2. 修改配置文件
+```shell
 vim headscale/config.yml
 cd think-app
 cp .example.env .env
 vim .env
-
+```
 3. 初始化sqlite数据库
-curl 172.17.0.1:8011/install
+`curl 172.17.0.1:8011/install`
 
 
 
