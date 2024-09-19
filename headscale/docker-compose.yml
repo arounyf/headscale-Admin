@@ -1,0 +1,15 @@
+services:  
+  headscale:  
+    image: headscale/headscale:0.22.3  
+    container_name: headscale  
+    restart: always  
+    network_mode: bridge
+    ports:  
+      - "8080:8080"  
+      - "9090:9090"  
+    volumes:  
+      - ~/headscale/config:/etc/headscale
+      - ~/headscale/data:/var/lib/headscale
+    command: ["headscale", "serve"] 
+    environment:
+      - TZ=Asia/Shanghai

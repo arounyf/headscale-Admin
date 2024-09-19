@@ -16,12 +16,20 @@ qq群 892467054
  2. 使用composer安装think-captcha
  3. 安装psql驱动
 ### 使用docker部署（推荐）
+1. 首先需要部署headscale，请查看 /headscale/docker-compose.yml
 ```shell
 cd
 git clone https://github.com/arounyf/headscale-Admin.git hs-admin
 cd hs-admin
 docker-compose up -d
 ```
+2. 修改配置文件
+cd ~/hs-admin
+vim headscale/config.yml
+cp /think-app/.example.env .env
+vim /think-app/.env
+
+
 
 # 功能
 - 用户管理
