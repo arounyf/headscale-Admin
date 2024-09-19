@@ -1,6 +1,3 @@
-tutorial-env
-tutorial-env/
-.tutorial-env
-.tutorial-env/
+!*tutorial-env
 *.log
 
