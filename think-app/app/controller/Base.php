@@ -17,10 +17,11 @@ class Base
     public $headers;
     public $acl;
     public $res;
+    public $offsetTime;
     
-    public $username;
-    public $user_id;
-    public $user_role;
+    // public $username;
+    // public $user_id;
+    // public $user_role;
 
 
 
@@ -65,7 +66,7 @@ class Base
         $cursor = Db::table('acls')->alias('a')
         ->join('users u','a.user_id = u.id')
         ->field('a.id,a.acl,u.enable')
-        ->order('id')->cursor();
+        ->order('a.id')->cursor();
         foreach($cursor as $acl){
             if($acl['enable']){
                 $acls['acls'][] =json_decode($acl['acl']);
@@ -79,9 +80,14 @@ class Base
 
 
     function offsetTime($dateTimeString) {
-        $timestamp = strtotime(substr($dateTimeString,0,19));
-        $timestamp += 8 * 3600;
-        return date('Y-m-d H:i:s', $timestamp);
+        if($this->offsetTime){
+            $timestamp = strtotime(substr($dateTimeString,0,19));
+            $timestamp += $this->offsetTime * 3600;
+            return date('Y-m-d H:i:s', $timestamp);
+        }else{
+            $timestamp = strtotime(substr($dateTimeString,0,19));
+            return date('Y-m-d H:i:s', $timestamp);
+        }
     }
 
 
@@ -94,6 +100,7 @@ class Base
 
     function curl_post($url,$data = '{}'){
         $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
@@ -108,6 +115,7 @@ class Base
 
     function curl_delete($url){
         $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);   //不显示输出

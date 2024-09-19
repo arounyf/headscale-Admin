@@ -129,7 +129,7 @@
         break;
         case 'reload':
           var data = checkStatus.data;
-          table.reload('test-table-index',true);
+          // table.reload('test-table-index',true);
           $.ajax({
             url:'/api/reload',
             type: 'post',

@@ -220,8 +220,8 @@ class Api extends Base
         if ($user_role == "manager"){
             $cursor = Db::table('machines')->alias('m')
                 ->join('users u','m.user_id = u.id')
-                ->field('m.id,u.name,m.given_name,m.ip_addresses,m.created_at,m.last_seen,m.host_info')
-                ->order('id')
+                ->field('m.id,u.name,m.given_name,m.ip_addresses,m.created_at,m.updated_at,m.host_info')
+                ->order('m.id')
                 ->limit($limit)
                 ->page($page)
                 ->select();
@@ -230,8 +230,8 @@ class Api extends Base
             $cursor = Db::table('machines')->alias('m')
                 ->join('users u','m.user_id = u.id')
                 ->where('user_id',$user_id)
-                ->field('m.id,u.name,m.given_name,m.ip_addresses,m.created_at,m.last_seen,m.host_info')
-                ->order('id')
+                ->field('m.id,u.name,m.given_name,m.ip_addresses,m.created_at,m.updated_at,m.host_info')
+                ->order('m.id')
                 ->limit($limit)
                 ->page($page)
                 ->select();
@@ -248,7 +248,7 @@ class Api extends Base
                 'name' => $value['given_name'],
                 'ip' => $value['ip_addresses'],
                 'createTime' => $this->offsetTime($value['created_at']),
-                'lastTime' => $this->offsetTime($value['last_seen'])
+                'lastTime' => $this->offsetTime($value['updated_at'])
             ];
             
             try { $node['Client'] = substr(json_decode($value['host_info'],true)['IPNVersion'],0,6);} catch (\Exception  $e) { $node['Client'] = "未知"; }
@@ -341,7 +341,7 @@ class Api extends Base
         $cursor = Db::table('routes')->alias('r')
             ->join('users u','r.user_id = u.id')
             ->field('r.id,r.prefix,r.machine_id,r.created_at,r.enabled,u.name')
-            ->order('id')
+            ->order('r.id')
             ->where($where_map)
             ->limit($limit)
             ->page($page)
@@ -376,9 +376,10 @@ class Api extends Base
         $url =  $this->server_url."/api/v1/routes/".$route_id."/enable";  
 
         $prefix = Db::table('routes')->where('id',$route_id)->column('prefix');
-        $count = Db::table('routes')->where('prefix',$prefix[0])->count();
-        
-        if($count >1){
+        $result = Db::table('routes')->where('prefix',$prefix[0])->where('enabled',true)->find();
+        // dump($result);
+
+        if($result != null){
             $this->res['msg'] = "打开失败,该网段已被使用";
         }else{
             if($this->route_verify($route_id)){
@@ -438,7 +439,7 @@ class Api extends Base
         $cursor = Db::table('acls')->alias('a')
             ->join('users u','a.user_id = u.id')
             ->field('a.id,a.acl,a.user_id,u.name')
-            ->order('id')
+            ->order('a.id')
             ->limit($limit)
             ->page($page)
             ->select();
@@ -503,21 +504,23 @@ class Api extends Base
     }
 
     public function read_acl(){
+        
         $filePath = $this->acl;
-        $fileHandle = fopen($filePath, 'r');
-        if ($fileHandle) {
-            $fileContent = '';
-            while (!feof($fileHandle)) {
-                $fileContent.= fread($fileHandle, 8192);
-            }
-            fclose($fileHandle);
-        } else {
-            echo "无法打开文件。";
+
+
+
+        try {
+            // 这里是主体代码
+            $fileContent = file_get_contents($filePath);
+            
+            $this->res["code"] = 0;
+            $this->res["data"] = $fileContent;
+        } catch (\Exception $e) {
+            // 这是进行异常捕获
+            // return json($e->getMessage());
+            $this->res["msg"] = "读取失败";
         }
 
-        $this->res["msg"] = "读取成功";
-        $this->res["code"] = 0;
-        $this->res["data"] = $fileContent;
         $this->resprint($this->res);
     }
 
@@ -548,7 +551,7 @@ class Api extends Base
         $cursor = Db::table('pre_auth_keys')->alias('p')
             ->join('users u','p.user_id = u.id')
             ->field('p.id,p.key,p.created_at,p.expiration,u.name')
-            ->order('id')
+            ->order('p.id')
             ->where($where_map)
             ->limit($limit)
             ->page($page)
@@ -632,7 +635,7 @@ class Api extends Base
         $cursor = Db::table('logs')->alias('l')
             ->join('users u','l.user_id = u.id')
             ->field('l.id,l.content,l.create_time,u.name')
-            ->order('id')
+            ->order('l.id')
             ->where($where_map)
             ->limit($limit)
             ->page($page)
