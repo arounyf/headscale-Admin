@@ -1,0 +1,30 @@
+server {
+    listen  80;
+	#listen  443 ssl;
+    #server_name  sqlite.dev.runyf.cn;
+		
+	
+	location / {
+		proxy_pass http://172.17.0.1:8022/;
+		proxy_http_version 1.1;
+		proxy_set_header Host $server_name;
+		# proxy_redirect http:// https://;
+		proxy_buffering off;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;
+		add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
+		
+		auth_basic "Please enter your username and password";
+		auth_basic_user_file /etc/nginx/ssl/ht.passwd;
+		autoindex on;
+	}
+
+	#PROXY-END/
+
+	
+	#ssl_certificate  /etc/nginx/ssl/runyf.cn.crt;
+    #ssl_certificate_key  /etc/nginx/ssl/runyf.cn.key;
+
+
+}
