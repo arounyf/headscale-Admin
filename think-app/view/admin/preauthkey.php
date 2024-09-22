@@ -17,7 +17,7 @@
     <div class="layui-row layui-col-space15">
       <div class="layui-col-md12">
         <div class="layui-card">
-          <div class="layui-card-header">路由中心</div>
+          <div class="layui-card-header">预共享密钥中心</div>
           <div class="layui-card-body">
             <table class="layui-hide" id="test-table-index" lay-filter="test-table-index"></table>
 
